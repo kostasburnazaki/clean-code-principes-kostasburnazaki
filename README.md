@@ -1,5 +1,8 @@
 [DEMO LINK](https://kostasburnazaki.github.io/clean-code-principes-kostasburnazaki/)
 
+# My library
+I've compiled a library based on this project, published it on npm (from this [REPO](https://github.com/kostasburnazaki/my-library/tree/source)), installed it here and repalced some method to demonstrate the library is working. The library compilation is set by "preset" functionality of webpack, which allow to merge (by webpack-merge) some additional config with base config. This method I've implemented in package.json scripts.
+
 # App Architecture
 
 ![plot](./architecture.png)
