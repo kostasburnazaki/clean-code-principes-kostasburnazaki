@@ -1,4 +1,8 @@
-import React, { useContext, FC } from "react";
+import React,
+  {
+    useContext,
+    FC
+  } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classNames from "classnames";
@@ -14,7 +18,7 @@ export const ButtonBack: FC = () => {
         className={classNames(
           'is-button',
           'ml-4',
-          { dark: darkTheme}
+          { dark: darkTheme }
         )}
         onClick={() => navigate(-1)}
       >

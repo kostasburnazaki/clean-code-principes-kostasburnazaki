@@ -32,7 +32,6 @@ async function request<T>(
     }
   };
   const data = await fetch(BASE_URL + url, options);
-  console.log(data);
   return handleErrors(data);
 };
 

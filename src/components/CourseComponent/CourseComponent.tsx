@@ -22,9 +22,12 @@ import { ButtonBack } from "../ButtonBack";
 import { Loader } from "../Loader";
 import { VideoJS } from "../Player";
 
+const MyLib = require('@kostasburnazaki/my-library');
+
+
 export const CourseComponent: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(initValues.loadingStatus);
-  const [course, setCourse] = useState<DetailedCourse>();
+  const [isLoading] = useState<boolean>(initValues.loadingStatus);
+  const [course] = useState<DetailedCourse>();
 
   const { courses } = useContext(CoursesContext);
   const { darkTheme } = useContext(ThemeContext);
@@ -38,8 +41,8 @@ export const CourseComponent: FC = () => {
       if (coursePreview) {
         const fetchData = async () => {
           const courseData = await fetchClient.getCourse(coursePreview.id);
-          setCourse(courseData);
-          setIsLoading(false);
+          MyLib.setCourse(courseData);
+          MyLib.setIsLoading(false);
         }
 
         fetchData()

@@ -24,18 +24,19 @@ import { ThemeContext } from './utils/ThemeContext';
 import { fetchClient } from './utils/api';
 
 import { Course } from './types/Course';
-
+const MyLib = require('@kostasburnazaki/my-library');
 
 export const App = () => {
-  const [courses, setCourses] = useState<Course[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(initValues.loadingStatus);
+  const [courses] = useState<Course[] | null>(null);
+  const [isLoading] = useState<boolean>(initValues.loadingStatus);
   const [darkTheme, setDarkTheme] = useState<boolean>(false)
 
+  
   useEffect(() => {
     const fetchData = async () => {
       const { courses } = await fetchClient.getCourses();
-      setCourses(courses);
-      setIsLoading(false);
+      MyLib.setCourses(courses);
+      MyLib.setIsLoading(false);
     };
 
     fetchData()
@@ -43,43 +44,41 @@ export const App = () => {
   }, []);
 
   return (
-    <>
-      <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
-        <Header />
+    <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
+      <Header />
 
-        <main className={
-          classNames({ dark: darkTheme })
-        }>
-          <CoursesContext.Provider value={{ courses }}>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  isLoading
-                    ? <Loader />
-                    : (
-                      <Courses />
-                    )
-                }
-              />
+      <main className={
+        classNames({ dark: darkTheme })
+      }>
+        <CoursesContext.Provider value={{ courses }}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                isLoading
+                  ? <Loader />
+                  : (
+                    <Courses />
+                  )
+              }
+            />
 
-              <Route
-                path="home"
-                element={
-                  <Navigate to="/" replace />
-                }
-              />
+            <Route
+              path="home"
+              element={
+                <Navigate to="/" replace />
+              }
+            />
 
-              <Route
-                path=":slug"
-                element={
-                  <CourseComponent />
-                }
-              />
-            </Routes>
-          </CoursesContext.Provider>
-        </main >
-      </ThemeContext.Provider>
-    </>
+            <Route
+              path=":slug"
+              element={
+                <CourseComponent />
+              }
+            />
+          </Routes>
+        </CoursesContext.Provider>
+      </main >
+    </ThemeContext.Provider>
   );
 };
